@@ -11,24 +11,58 @@ number.  The crafted number is a product of all primes from two to the
 square root of the candidate.  If the greatest common divisor is one,
 then the candidate is prime.
 
-From my laptop, starting at one hundred trillion:
+The range of numbers to test is based on an arbitrary number so search
+around.  A valid range is computed such that the chosen number is
+within the range.  Prime numbers below the range may be a factor of
+the value used for testing.  Testing numbers below the range has the
+effect of misidentifying some prime numbers as composite.  Composite
+numbers above the range may have a prime factor greater than the
+largest factor of the number used for testing.  Testing numbers above
+the range has the effect of misidentifying some composite numbers as
+prime.
 
-    Starting value 100000000000000
-    Ending value 100000000010000
-    Preparation in 2.19 sec (6172 composite values)
-    Tested 10000 numbers in 7.25 sec (1379.97 per sec)
-    Found 304 prime numbers
+From my laptop, test for primes around one billion:
 
-From my laptop, starting at one quadrillion:
+    Starting value 999950884
+    Ending value 1000014129
+    Preparation in 0.17 sec (31 composite values)
+    Tested 63245 numbers in 0.24 sec (265120.44 per sec)
+    Found 3057 prime numbers
+
+From my laptop, test for primes around one trillion:
+
+    Starting value 1000000000000
+    Ending value 1000002000001
+    Preparation in 0.21 sec (720 composite values)
+    Tested 2000001 numbers in 153.97 sec (12989.42 per sec)
+    Found 72413 prime numbers
+
+This is starting to be a rather large range to search, so you can
+specify the maximum size of the range with howmany.
+
+From my laptop, test ten thousand numbers around one trillion:
+
+    Starting value 1000000000000
+    Ending value 1000000010000
+    Preparation in 0.20 sec (720 composite values)
+    Tested 10000 numbers in 0.84 sec (11885.77 per sec)
+    Found 335 prime numbers
+
+From my laptop, test ten thousand numbers around one quadrillion:
 
     Starting value 1000000000000000
     Ending value 1000000000010000
-    Preparation in 16.87 sec (18221 composite values)
-    Tested 10000 numbers in 18.49 sec (540.78 per sec)
+    Preparation in 17.19 sec (18221 composite values)
+    Tested 10000 numbers in 18.62 sec (537.03 per sec)
     Found 263 prime numbers
 
 ## SieveOfEratosthenes
 
 This is perhaps the most important algorithm to know if you go for an
 interview at one of the big west coast software companies.  Nuff said.
+
+From my laptop, enumerate the first million primes:
+
+    Found 1000000 primes in 4.510 sec (221705.6 per sec)
+    Last prime generated is 15485863
 
