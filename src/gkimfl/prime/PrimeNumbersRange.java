@@ -63,6 +63,9 @@ public class PrimeNumbersRange {
      * Test is val shares a common factor with factors.
      */
     public static boolean isPrime(BigInteger val, BigInteger factors) {
+        if(val.equals(BigInteger.ONE)) {
+            return false;
+        }
         return factors.gcd(val).equals(BigInteger.ONE);
     }
 
@@ -92,19 +95,29 @@ public class PrimeNumbersRange {
      * Ahh, yes! Run the algorithm and print some stats.
      */
     public static void main(String[] argv) {
-        // look for primes in the range from start up to end
-        BigInteger start = new BigInteger("1000000000000000");
-        BigInteger end = start.add(BigInteger.valueOf(10000));
-
+        // look for primes around this value
+        BigInteger around = new BigInteger("1000000000");
+        
         // print prime numbers that are found
         boolean show = false;
+
+        // factoring will be valid in this range
+        // below start, may miss primes that are factors of the composite number
+        // above end, may find composites with larger prime factors
+        BigInteger start = getSquareRoot(around);
+        BigInteger end = start.add(BigInteger.ONE);
+        start = start.multiply(start);
+        end = end.multiply(end);
+        
+        System.out.format("Starting value %s%n", start);
+        System.out.format("Ending value %s%n", end);
 
         long time = 0;
         int count = 0;
         int delta = end.subtract(start).intValue();
 
         time = -System.nanoTime();
-        BigInteger[] factoring = getFactoringValues(end);
+        BigInteger[] factoring = getFactoringValues(end.subtract(BigInteger.ONE));
         time += System.nanoTime();
         System.out.format("Preparation in %.2f sec (%d composite values)\n",
                 time / 1000000000f, factoring.length);
