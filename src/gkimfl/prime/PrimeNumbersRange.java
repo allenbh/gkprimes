@@ -97,6 +97,7 @@ public class PrimeNumbersRange {
     public static void main(String[] argv) {
         // look for primes around this value
         BigInteger around = new BigInteger("1000000000");
+        BigInteger howmany = new BigInteger("10000");
         
         // print prime numbers that are found
         boolean show = false;
@@ -108,6 +109,12 @@ public class PrimeNumbersRange {
         BigInteger end = start.add(BigInteger.ONE);
         start = start.multiply(start);
         end = end.multiply(end);
+        if(howmany != null && end.subtract(start).compareTo(howmany) > 0) {
+            if(end.subtract(howmany).compareTo(around) > 0) {
+                start = around;
+            }
+            end = start.add(howmany);
+        }
         
         System.out.format("Starting value %s%n", start);
         System.out.format("Ending value %s%n", end);
