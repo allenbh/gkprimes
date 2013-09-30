@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.math.BigInteger;
 
-public class SieveOfEratosthenes implements Iterator<BigInteger> {
+public class SieveOfEratosthenes implements Iterator<BigInteger>, Iterable<BigInteger> {
     /**
      * This is how many numbers to sieve in each batch.
      */
@@ -53,6 +53,11 @@ public class SieveOfEratosthenes implements Iterator<BigInteger> {
         this(DEFAULT_SEIVE_LEN);
     }
 
+    @Override
+    public Iterator<BigInteger> iterator() {
+        return this;
+    }
+
     /**
      * Get the next prime number.
      */
@@ -64,7 +69,7 @@ public class SieveOfEratosthenes implements Iterator<BigInteger> {
                     return foundPrime();
                 }
             }
-            advanceSeive();
+            advanceSieve();
             sievePos = -1;
         }
     }
@@ -90,7 +95,7 @@ public class SieveOfEratosthenes implements Iterator<BigInteger> {
      * Previously found prime numbers are used to mark off any composites in the
      * new range.
      */
-    private void advanceSeive() {
+    private void advanceSieve() {
         Arrays.fill(sieve, true);
         sieveBase = sieveBound;
         sieveBound = sieveBound.add(sieveLength);
@@ -150,4 +155,5 @@ public class SieveOfEratosthenes implements Iterator<BigInteger> {
                 tofind, time / 1000000000f, 1000000000f * tofind / time);
         System.out.format("Last prime generated is %s%n", last);
     }
+
 }
