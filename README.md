@@ -2,14 +2,45 @@
 
 I like primes :)  They make cryptography hard.
 
+## SieveOfEratosthenes
+
+This is perhaps the most important algorithm to know if you go for an
+interview at one of the big west coast software companies.  Nuff said.
+
+From my laptop, enumerate the first million primes:
+
+    Found 1000000 primes in 4.510 sec (221705.6 per sec)
+    Last prime generated is 15485863
+
+## SieveOfEratosthenesSegment
+
+This searches for primes in a segment of candidate values.  The
+segment is bounded by successive square numbers, so all the values in
+the segment have the same integer square root.  The sieve for the
+segment is marked off using primes up to the square root.  That is
+sufficient to mark off all the composites.  If a composite number has
+a prime factor greater than the square root, then it must also have a
+prime factor that is less than the square root.
+
+I wrote this after the following, PrimeNumbersRange.  The segmented
+sieve algorithm is much faster, it turns out.
+
+From my laptop, test ten thousand numbers around one quadrillion:
+
+    Starting value 1000000000000000
+    Ending value 1000000000010000
+    Preparation in 10.00 sec
+    Tested 10000 numbers in 0.00 sec (37224952.00 per sec)
+    Found 263 prime numbers
+
 ## PrimeNumbersRange
 
 This is a toy program to test an idea about using the greatest common
-divisor method to quickly check for primes.  The idea is to check for
-a common divisor between a candidate prime and a carefully crafted
-number.  The crafted number is a product of all primes from two to the
-square root of the candidate.  If the greatest common divisor is one,
-then the candidate is prime.
+divisor method to check for primes.  The idea is to check for a common
+divisor between a candidate prime and a carefully crafted number.  The
+crafted number is a product of all primes from two to the square root
+of the candidate.  If the greatest common divisor is one, then the
+candidate is prime.
 
 The range of numbers to test is based on an arbitrary number so search
 around.  A valid range is computed such that the chosen number is
@@ -56,13 +87,4 @@ From my laptop, test ten thousand numbers around one quadrillion:
     Tested 10000 numbers in 18.62 sec (537.03 per sec)
     Found 263 prime numbers
 
-## SieveOfEratosthenes
-
-This is perhaps the most important algorithm to know if you go for an
-interview at one of the big west coast software companies.  Nuff said.
-
-From my laptop, enumerate the first million primes:
-
-    Found 1000000 primes in 4.510 sec (221705.6 per sec)
-    Last prime generated is 15485863
 
