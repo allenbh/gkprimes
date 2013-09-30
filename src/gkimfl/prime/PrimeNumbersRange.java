@@ -1,34 +1,10 @@
 package gkimfl.prime;
 
+import static gkimfl.prime.Math.getSquareRoot;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class PrimeNumbersRange {
-
-    /**
-     * Calculate integer square root by binary search.
-     */
-    public static BigInteger getSquareRoot(BigInteger n) {
-        BigInteger high = n.shiftRight(n.bitLength() >> 1);
-        BigInteger low = n.divide(high).add(BigInteger.ONE);
-
-        if (high.compareTo(low) < 0) {
-            BigInteger tmp = low;
-            low = high;
-            high = tmp;
-        }
-
-        while (high.compareTo(low) >= 0) {
-            BigInteger mid = low.add(high).shiftRight(1);
-            if (mid.multiply(mid).compareTo(n) > 0) {
-                high = mid.subtract(BigInteger.ONE);
-            }
-            else {
-                low = mid.add(BigInteger.ONE);
-            }
-        }
-        return low.subtract(BigInteger.ONE);
-    }
 
     /**
      * Generate a list of numbers with potential prime factors.
@@ -42,7 +18,7 @@ public class PrimeNumbersRange {
         ArrayList<BigInteger> factors = new ArrayList<BigInteger>();
         BigInteger current = BigInteger.ONE;
         val = val.pow(50);
-        for (BigInteger prime : new PrimeNumbers()) {
+        for (BigInteger prime : new SieveOfEratosthenes()) {
             if (prime.compareTo(sqrtVal) > 0) {
                 break;
             }
@@ -63,7 +39,7 @@ public class PrimeNumbersRange {
      * Test is val shares a common factor with factors.
      */
     public static boolean isPrime(BigInteger val, BigInteger factors) {
-        if(val.equals(BigInteger.ONE)) {
+        if (val.equals(BigInteger.ONE)) {
             return false;
         }
         return factors.gcd(val).equals(BigInteger.ONE);
@@ -98,7 +74,7 @@ public class PrimeNumbersRange {
         // look for primes around this value
         BigInteger around = new BigInteger("1000000000");
         BigInteger howmany = new BigInteger("10000");
-        
+
         // print prime numbers that are found
         boolean show = false;
 
@@ -109,13 +85,13 @@ public class PrimeNumbersRange {
         BigInteger end = start.add(BigInteger.ONE);
         start = start.multiply(start);
         end = end.multiply(end);
-        if(howmany != null && end.subtract(start).compareTo(howmany) > 0) {
-            if(end.subtract(howmany).compareTo(around) > 0) {
+        if (howmany != null && end.subtract(start).compareTo(howmany) > 0) {
+            if (end.subtract(howmany).compareTo(around) > 0) {
                 start = around;
             }
             end = start.add(howmany);
         }
-        
+
         System.out.format("Starting value %s%n", start);
         System.out.format("Ending value %s%n", end);
 
