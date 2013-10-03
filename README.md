@@ -4,8 +4,8 @@ I like primes :)  They make cryptography hard.
 
 ## SieveOfEratosthenes
 
-This is perhaps the most important algorithm to know if you go for an
-interview at one of the big west coast software companies.  Nuff said.
+This is perhaps the most important algorithm to know about primes.
+If unfamiliar, it is definitely worth reading about on wikipedia.
 
 From my laptop, enumerate the first million primes:
 
